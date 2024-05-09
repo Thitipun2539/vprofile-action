@@ -16,6 +16,9 @@ jobs:
       - name: Maven test
         run: mvn test
 
+      - name: Maven compile
+        run: mvn compile
+
       - name: Checkstyle
         run: mvn checkstyle:checkstyle
 
@@ -41,7 +44,6 @@ jobs:
            -Dsonar.junit.reportsPath=target/surefire-reports/ 
            -Dsonar.jacoco.reportsPath=target/jacoco.exec 
            -Dsonar.java.checkstyle.reportPaths=target/checkstyle-result.xml
-           -sonar.exclusions=**/*.java
 
     # Check the Quality Gate status
       - name: SonarQube Quality Gate check
