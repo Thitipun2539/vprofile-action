@@ -7,7 +7,7 @@ metadata:
 spec:
   ingressClassName: nginx
   rules:
-  - host: vprofile.thehkh.com
+  - host: thiti-kubevpro.thitidevops.store
     http:
       paths:
       - path: /
