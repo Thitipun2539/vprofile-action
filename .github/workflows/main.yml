@@ -16,9 +16,6 @@ jobs:
       - name: Maven test
         run: mvn test
 
-      - name: Maven install
-        run: mvn clean install
-
       - name: Checkstyle
         run: mvn checkstyle:checkstyle
 
@@ -40,7 +37,7 @@ jobs:
            -Dsonar.login=${{ secrets.SONAR_TOKEN }}
            -Dsonar.organization=${{ secrets.SONAR_ORGANIZATION }}
            -Dsonar.projectKey=${{ secrets.SONAR_PROJECT_KEY }}
-           -Dsonar.sources=src/
+           -Dsonar.sources=src/main/
            -Dsonar.junit.reportsPath=target/surefire-reports/ 
            -Dsonar.jacoco.reportsPath=target/jacoco.exec 
            -Dsonar.java.checkstyle.reportPaths=target/checkstyle-result.xml
