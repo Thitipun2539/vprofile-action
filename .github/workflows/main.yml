@@ -32,13 +32,13 @@ jobs:
 
       # Run sonar-scanner
       - name: SonarQube Scan
-        run: sonar-scanner
+        run: mvn clean install sonar:sonar
            -Dsonar.host.url=${{ secrets.SONAR_URL }}
            -Dsonar.login=${{ secrets.SONAR_TOKEN }}
            -Dsonar.organization=${{ secrets.SONAR_ORGANIZATION }}
            -Dsonar.projectKey=${{ secrets.SONAR_PROJECT_KEY }}
-           -Dsonar.sources=src/main/java/
-           -Dsonar.java.binaries=target/classes 
+           -Dsonar.sources=src/
+           -Dsonar.java.binaries=target/classes
            -Dsonar.junit.reportsPath=target/surefire-reports/ 
            -Dsonar.jacoco.reportsPath=target/jacoco.exec 
            -Dsonar.java.checkstyle.reportPaths=target/checkstyle-result.xml
