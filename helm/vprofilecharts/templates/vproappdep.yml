@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: vproapp # Name of the container
-        image: {{ .Values.appimage}}: {{ .Values.apptag }} # Variable for name and tag refering from values.yaml file
+        image: {{ .Values.appimage}}:{{ .Values.apptag }} # Variable for name and tag refering from values.yaml file
         ports:
         - name: vproapp-port # Name of the port
           containerPort: 8080 # Port number exposed by the container
