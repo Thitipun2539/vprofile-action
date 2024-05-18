@@ -1,0 +1,30 @@
+apiVersion: apps/v1 # Kubernetes API version for Deployment
+kind: Deployment # Type of Kubernetes resource
+metadata:
+  name: vproapp # Name of the Deployment
+  labels:
+    app: vproapp # Label to identify this Deployment
+spec:
+  replicas: 1 # Number of Pod replicas to maintain
+  selector:
+    matchLabels:
+      app: vproapp # Select Pods with label 'app: vproapp'
+  template:
+    metadata:
+      labels:
+        app: vproapp # Label applied to Pods created from this template
+    spec:
+      containers:
+      - name: vproapp # Name of the container
+        image: {{ .Values.appimage}}: {{ .Values.apptag }} # Variable for name and tag refering from values.yaml file
+        ports:
+        - name: vproapp-port # Name of the port
+          containerPort: 8080 # Port number exposed by the container
+      initContainers:
+      - name: init-mydb # Name of the init container for database
+        image: busybox # Docker image used for the init container
+        command: ['sh', '-c', 'until nslookup vprodb.$(cat /var/run/secrets/kubernetes.io/serviceaccount/namespace).svc.cluster.local; do echo waiting for mydb; sleep 2; done;'] # Command to wait for database service
+      - name: init-memcache # Name of the init container for memcache
+        image: busybox # Docker image used for the init container
+        command: ['sh', '-c', 'until nslookup vprocache01.$(cat /var/run/secrets/kubernetes.io/serviceaccount/namespace).svc.cluster.local; do echo waiting for mydb; sleep 2; done;'] # Command to wait for memcache service
+

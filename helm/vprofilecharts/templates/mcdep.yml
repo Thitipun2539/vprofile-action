@@ -1,0 +1,23 @@
+apiVersion: apps/v1 # Kubernetes API version for Deployment
+kind: Deployment # Type of Kubernetes resource
+metadata:
+  name: vpromc # Name of the Deployment
+  labels:
+    app: vpromc # Label to identify this Deployment
+spec:
+  selector:
+    matchLabels:
+      app: vpromc # Select Pods with label 'app: vpromc'
+  replicas: 1 # Number of Pod replicas to maintain
+  template:
+    metadata:
+      labels:
+        app: vpromc # Label applied to Pods created from this template
+    spec:
+      containers:
+      - name: vpromc # Name of the container
+        image: memcached # Docker image used for the container
+        ports:
+        - name: vpromc-port # Name of the port
+          containerPort: 11211 # Port number exposed by the container
+
