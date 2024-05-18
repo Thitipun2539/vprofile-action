@@ -1,31 +1,32 @@
-apiVersion: apps/v1
-kind: Deployment
+apiVersion: apps/v1 # Kubernetes API version for Deployment
+kind: Deployment # Type of Kubernetes resource
 metadata:
-  name: vpromq01
+  name: vpromq01 # Name of the Deployment
   labels:
-    app: vpromq01
+    app: vpromq01 # Label to identify this Deployment
 spec:
   selector:
     matchLabels:
-      app: vpromq01
-  replicas: 1
+      app: vpromq01 # Select Pods with label 'app: vpromq01'
+  replicas: 1 # Number of Pod replicas to maintain
   template:
     metadata:
       labels:
-        app: vpromq01
+        app: vpromq01 # Label applied to Pods created from this template
     spec:
       containers:
-      - name: vpromq01
-        image: rabbitmq
+      - name: vpromq01 # Name of the container
+        image: rabbitmq # Docker image used for the container
         ports:
-        - name: vpromq01-port
-          containerPort: 15672
-        env: 
-         - name: RABBITMQ_DEFAULT_PASS
-           valueFrom:
-             secretKeyRef:
-               name: app-secret
-               key: rmq-pass
-         - name: RABBITMQ_DEFAULT_USER
-           value: "guest"
+        - name: vpromq01-port # Name of the port
+          containerPort: 15672 # Port number exposed by the container
+        env:
+        - name: RABBITMQ_DEFAULT_PASS # Name of the environment variable for the RabbitMQ password
+          valueFrom:
+            secretKeyRef:
+              name: app-secret # Name of the Secret containing the password
+              key: rmq-pass # Key within the Secret to retrieve the password
+        - name: RABBITMQ_DEFAULT_USER # Name of the environment variable for the RabbitMQ username
+          value: "guest" # Value for the RabbitMQ username
+
 

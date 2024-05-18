@@ -1,31 +1,31 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: vprodb
+  name: vprodb # Name of the Deployment
   labels:
-    app: vprodb
+    app: vprodb # Label to identify this Deployment
 spec:
   selector:
     matchLabels:
-      app: vprodb
-  replicas: 1
+      app: vprodb # Select Pods with label 'app: vprodb'
+  replicas: 1 # Number of Pod replicas to maintain
   template:
     metadata:
       labels:
-        app: vprodb
+        app: vprodb # Label applied to Pods created from this template
     spec:
       containers:
-      - name: vprodb
-        image: vprofile/vprofiledb 
+      - name: vprodb # Name of the container
+        image: vprofile/vprofiledb # Docker image used for the container
         ports:
-        - name: vprodb-port
-          containerPort: 3306
-        env: 
-         - name: MYSQL_ROOT_PASSWORD
-           valueFrom:
-             secretKeyRef:
-               name: app-secret
-               key: db-pass
+        - name: vprodb-port # Name of the port
+          containerPort: 3306 # Port number exposed by the container
+        env:
+        - name: MYSQL_ROOT_PASSWORD # Name of the environment variable
+          valueFrom:
+            secretKeyRef:
+              name: app-secret # Name of the Secret containing the password
+              key: db-pass # Key within the Secret to retrieve the password
 #        env:
 #         - name: MYSQL_ROOT_PASSWORD
 #           value: "vprodbpass"

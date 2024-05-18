@@ -1,19 +1,19 @@
-apiVersion: networking.k8s.io/v1
-kind: Ingress
+apiVersion: networking.k8s.io/v1 # Kubernetes API version for Ingress
+kind: Ingress # Type of Kubernetes resource
 metadata:
-  name: vpro-ingress
+  name: vpro-ingress # Name of the Ingress resource
   annotations:
-    nginx.ingress.kubernetes.io/use-regex: "true"
+    nginx.ingress.kubernetes.io/use-regex: "true" # Annotation to enable regex support
 spec:
-  ingressClassName: nginx
+  ingressClassName: nginx # Class name of the Ingress controller
   rules:
-  - host: thiti-kubevpro.thitidevops.store
+  - host: thiti-kubevpro.thitidevops.store # Hostname for routing
     http:
       paths:
-      - path: /
-        pathType: Prefix
+      - path: / # Path to match
+        pathType: Prefix # Type of path matching
         backend:
           service:
-            name: my-app
+            name: my-app # Name of the backend service
             port:
-              number: 8080
+              number: 8080 # Port 
