@@ -7,7 +7,7 @@ metadata:
 spec:
   ingressClassName: nginx # Class name of the Ingress controller
   rules:
-  - host: thiti-kubevpro.thitidevops.store # Hostname for routing
+  - host: thiti-kubevpro2.thitidevops.store # Hostname for routing
     http:
       paths:
       - path: / # Path to match
